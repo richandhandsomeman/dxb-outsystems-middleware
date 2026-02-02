@@ -18,19 +18,18 @@ type Flight struct {
 func getFlightsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	// Наша временная база данных (Mock Data)
 	flights := []Flight{
 		{
 			FlightNo:     "EK132",
 			Airline:      "Emirates",
-			Origin:       "Moscow (DME)",
+			Origin:       "Moscow DME",
 			ScheduleTime: "16:45",
 			Status:       "On Time",
 		},
 		{
 			FlightNo:     "FZ728",
 			Airline:      "flydubai",
-			Origin:       "Istanbul (IST)",
+			Origin:       "Istanbul IST",
 			ScheduleTime: "17:10",
 			Status:       "Delayed",
 		},
@@ -42,10 +41,9 @@ func getFlightsHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/flights", getFlightsHandler)
 
-	// Берем порт из системы (важно для Render!)
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "10000" 
+		port = "10000"
 	}
 
 	fmt.Printf("Server starting on port %s...\n", port)
